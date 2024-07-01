@@ -2,7 +2,7 @@
 	{
 		"account_id":"0005de0e-d11c-556b-9839-8ee6e7ced627",
 		"service_location_id":"ec3fdf66-647d-5f51-8be6-75abb919e1fa",
-		"start_date":"2024-04-01T00:00:00-06:00",
+		"start_date":"2024-01-01T00:00:00-06:00",
 		"end_date":"2024-05-01T23:59:59-06:00",
 		"fuel_type":"electric",
 		"uplight_tenant_id":"ca90af7d-7f2d-5817-ba22-b7e90f7b811c",
