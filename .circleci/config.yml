@@ -1,0 +1,44 @@
+version: 2.1
+
+orbs:
+  newman: postman/newman@1.0.0
+
+jobs:          
+  emission-reporting-service:
+        description: Run Postman collection tests for Emission Reporting Service
+        parameters:
+          collection:
+            type: string
+          environment:
+            type: string
+          temp:
+            type: string
+          iteration-data:
+            type: string
+        executor: newman/postman-newman-docker
+        
+        steps:
+          - checkout 
+          - run:
+              name: Installing htmlextra reporting plugin
+              command: |
+                npm install -g newman-reporter-htmlextra           
+          - run:          
+              name: Executing the collection tests for Emission Reporting Service
+              command: |
+                npx newman run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${AUTOMATION_API_KEY} -e https://api.getpostman.com/environments/<< parameters.environment >>?apikey=${AUTOMATION_API_KEY} -d << parameters.iteration-data >> --reporters "cli,htmlextra" --folder "get_emission_estimates"
+          - store_artifacts: {path: ~/project}
+          - store_test_results: {path: /root/project/newman}
+
+workflows:
+  billikens-api-automation:
+    jobs:      
+      - emission-reporting-service:
+          name: Emission Reporting Service
+          collection: 27218141-07de7cb5-c277-477f-bcfe-b214b6287fbf
+          environment: 27218141-54c92888-5ba8-4985-b561-4a35358a05e1
+          iteration-data: ./data.json
+          temp: "Automated Run: $( date '+%F_%H:%M:%S' )"
+          context:
+            - postman
+      
