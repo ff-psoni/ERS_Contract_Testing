@@ -26,7 +26,7 @@ jobs:
           - run:          
               name: Executing the collection tests for Emission Reporting Service
               command: |
-                npx newman run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${AUTOMATION_API_KEY} -e https://api.getpostman.com/environments/<< parameters.environment >>?apikey=${AUTOMATION_API_KEY} -d << parameters.iteration-data >> --reporters "cli,htmlextra" --folder "get_emission_estimates"
+                npx newman run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/<< parameters.environment >>?apikey=${POSTMAN_API_KEY} -d << parameters.iteration-data >> --reporters "cli,htmlextra" --folder "get_emission_estimates"
           - store_artifacts: {path: ~/project}
           - store_test_results: {path: /root/project/newman}
 
