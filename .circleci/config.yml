@@ -35,7 +35,7 @@ workflows:
     jobs:      
       - emission-reporting-service:
           name: Emission Reporting Service
-          collection: 27218141-07de7cb5-c277-477f-bcfe-b214b6287fbf
+          collection: 29730803-543de010-78be-4b07-ae1b-ae37ff760a15
           environment: 27218141-54c92888-5ba8-4985-b561-4a35358a05e1
           iteration-data: ./data.json
           temp: "Automated Run: $( date '+%F_%H:%M:%S' )"
