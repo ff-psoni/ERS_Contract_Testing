@@ -16,16 +16,20 @@ jobs:
         steps:
           - checkout 
           - run:
-              name: Installing htmlextra reporting plugin
-              command: |
-                npm install -g newman-reporter-htmlextra newman-reporter-testrail          
-          - run:          
-              name: Executing the collection tests for checking TestRail Integration
-              command: |
-                newman run -r testrail,cli,htmlextra Practice.postman_collection.json -r testrail,cli,htmlextra --env-var TESTRAIL_DOMAIN=${TESTRAIL_DOMAIN} --env-var TESTRAIL_USERNAME=${TESTRAIL_USERNAME} --env-var TESTRAIL_APIKEY=${TESTRAIL_APIKEY} --env-var TESTRAIL_PROJECT_ID="21" --env-var TESTRAIL_TITLE="TestRail Report" --reporter-htmlextra-export=~/project/newman/report.html 
-          - store_artifacts: {path: ~/project}
-          - store_test_results: {path: /root/project/newman}
-
+          name: Installing testrail reporting plugin
+          command: |
+            npm install newman-reporter-testrail --global
+      - run:
+          name: Installing htmlextra reporting plugin
+          command: |
+            npm install -g newman-reporter-htmlextra   
+      - run:
+          name: Executing the collection
+          command: |
+            npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --reporters "cli,htmlextra,testrail"
+      - store_artifacts: { path: ~/project/newman }
+      - store_test_results: { path: /root/project/newman }       
+  
 workflows:
   qe-guild-api-automation:
     jobs:      
