@@ -35,4 +35,5 @@ workflows:
           temp: "Automated Run: $( date '+%F_%H:%M:%S' )"
           context:
             - postman
+            - testrail
       
