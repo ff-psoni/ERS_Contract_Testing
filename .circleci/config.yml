@@ -22,8 +22,7 @@ jobs:
           - run:          
               name: Executing the collection tests for checking TestRail Integration
               command: |
-                newman run -r testrail,cli,htmlextra Practice.postman_collection.json -r testrail,cli,htmlextra domain=${TESTRAIL_DOMAIN} title="TestRail Report" username=${TESTRAIL_USERNAME} apikey=${TESTRAIL_APIKEY} projectid="21" --reporter-htmlextra-export ~/project/newman/report.html  
-                newman run Practice.postman_collection.json -r testrail,cli,htmlextra --reporter-testrail-domain=${TESTRAIL_DOMAIN} --reporter-testrail-title="TestRail Report" --reporter-testrail-username=${TESTRAIL_USERNAME} --reporter-testrail-apikey=${TESTRAIL_APIKEY} --reporter-testrail-projectid="21" --reporter-htmlextra-export=~/project/newman/report.html
+                newman run -r testrail,cli,htmlextra Practice.postman_collection.json -r testrail,cli,htmlextra --env-var TESTRAIL_DOMAIN=${TESTRAIL_DOMAIN} --env-var TESTRAIL_USERNAME=${TESTRAIL_USERNAME} --env-var TESTRAIL_APIKEY=${TESTRAIL_APIKEY} --env-var TESTRAIL_PROJECT_ID="21" --env-var TESTRAIL_TITLE="TestRail Report" --reporter-htmlextra-export=~/project/newman/report.html 
           - store_artifacts: {path: ~/project}
           - store_test_results: {path: /root/project/newman}
 
