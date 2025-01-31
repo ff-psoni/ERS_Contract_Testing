@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "242b1743-d251-4ab9-a0fd-24102d0622fb",
+		"name": "Practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27218141"
+	},
+	"item": [
+		{
+			"name": "GetPageUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"    pm.test(\"C6526519 verify 200 status\", function(){\r",
+							"\r",
+							"        pm.response.to.have.status(200);\r",
+							"\r",
+							"    }\r",
+							"    );\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"page_id\", 2);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
