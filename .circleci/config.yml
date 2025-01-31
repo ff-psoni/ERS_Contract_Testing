@@ -22,7 +22,7 @@ jobs:
           - run:          
               name: Executing the collection tests for checking TestRail Integration
               command: |
-                npx newman run Practice.postman_collection.json -r testrail,cli,htmlextra --reporter-testrail-domain=${TESTRAIL_DOMAIN} --reporter-htmlextra-title="TestRail Report" --reporter-testrail-username=${TESTRAIL_USERNAME} --reporter-testrail-apikey=${TESTRAIL_APIKEY} --reporter-testrail-projectid="21" --reporter-htmlextra-export ~/project/newman/report.html  
+                newman run -r testrail,cli,htmlextra Practice.postman_collection.json -r testrail,cli,htmlextra --reporter-testrail-domain=${TESTRAIL_DOMAIN} --reporter-htmlextra-title="TestRail Report" --reporter-testrail-username=${TESTRAIL_USERNAME} --reporter-testrail-apikey=${TESTRAIL_APIKEY} --reporter-testrail-projectid="21" --reporter-htmlextra-export ~/project/newman/report.html  
           - store_artifacts: {path: ~/project}
           - store_test_results: {path: /root/project/newman}
 
