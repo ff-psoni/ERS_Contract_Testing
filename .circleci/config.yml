@@ -28,8 +28,13 @@ jobs:
               command: |
                 echo export TESTRAIL_RUN_NAME="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_$(date '+%F_%H:%M:%S')" >> "$BASH_ENV"; source "$BASH_ENV"
                 echo export TESTRAIL_TITLE="${TESTRAIL_RUN_NAME}" >> "$BASH_ENV"; source "$BASH_ENV"
+                echo export TESTRAIL_PROJECT_ID="21" >> "$BASH_ENV"; source "$BASH_ENV"
+                echo export TESTRAIL_APIKEY="${TESTRAIL_APIKEY}" >> "$BASH_ENV"; source "$BASH_ENV"
+                echo export TESTRAIL_DOMAIN="${TESTRAIL_DOMAIN}" >> "$BASH_ENV"; source "$BASH_ENV"
+                echo export TESTRAIL_USERNAME="${TESTRAIL_USERNAME}" >> "$BASH_ENV"; source "$BASH_ENV"
                 source "$BASH_ENV"
                 echo "$TESTRAIL_TITLE"
+                echo "$TESTRAIL_USERNAME"
           - run:
               name: Executing the collection
               command: |
