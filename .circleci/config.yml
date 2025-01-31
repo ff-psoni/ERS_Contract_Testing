@@ -26,7 +26,7 @@ jobs:
           - run:
               name: Executing the collection
               command: |
-                npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --env-var TESTRAIL_APIKEY=${TESTRAIL_APIKEY} --reporters "cli,htmlextra,testrail"
+                npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --env-var "TESTRAIL_APIKEY=${TESTRAIL_APIKEY}" --reporters "cli,htmlextra,testrail"
           - store_artifacts: { path: ~/project/newman }
           - store_test_results: { path: /root/project/newman }       
   
