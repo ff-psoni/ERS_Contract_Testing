@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"\r",
-							"    pm.test(\"C6526519 verify 200 status\", function(){\r",
+							"    pm.test(\"C6528726 verify 200 status\", function(){\r",
 							"\r",
 							"        pm.response.to.have.status(200);\r",
 							"\r",
