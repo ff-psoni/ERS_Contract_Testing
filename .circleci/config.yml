@@ -25,7 +25,11 @@ jobs:
                 npm install -g newman-reporter-htmlextra   
           - run:
               name: Echo Environment Variable
-              command: echo ${TESTRAIL_APIKEY}
+              command: |
+                echo export TESTRAIL_RUN_NAME="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_$(date '+%F_%H:%M:%S')" >> "$BASH_ENV"; source "$BASH_ENV"
+                echo export TESTRAIL_TITLE="${TESTRAIL_RUN_NAME}" >> "$BASH_ENV"; source "$BASH_ENV"
+                source "$BASH_ENV"
+                echo "$TESTRAIL_TITLE"
           - run:
               name: Executing the collection
               command: |
