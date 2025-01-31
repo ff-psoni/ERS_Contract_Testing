@@ -25,11 +25,10 @@ jobs:
                 npm install -g newman-reporter-htmlextra   
           - run:
               name: Echo Environment Variable
-              command: echo "MY_ENV_VAR value is $TESTRAIL_USERNAME"
+              command: echo ${TESTRAIL_APIKEY}
           - run:
               name: Executing the collection
               command: |
-                echo $TESTRAIL_APIKEY
                 npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --env-var TESTRAIL_APIKEY=${TESTRAIL_APIKEY} --reporters "cli,htmlextra,testrail"
                 
           - store_artifacts: { path: ~/project/newman }
