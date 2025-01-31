@@ -22,7 +22,7 @@ jobs:
           - run:          
               name: Executing the collection tests for checking TestRail Integration
               command: |
-                npx newman run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${POSTMAN_API_KEY} -r testrail,cli,htmlextra
+                npx newman run Practice.postman_collection.json -r testrail,cli,htmlextra
           - store_artifacts: {path: ~/project}
           - store_test_results: {path: /root/project/newman}
 
