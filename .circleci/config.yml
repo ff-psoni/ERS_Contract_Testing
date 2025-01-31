@@ -4,16 +4,12 @@ orbs:
   newman: postman/newman@1.0.0
 
 jobs:          
-  testrail-service-demo:
+    testrail-service-demo:
         description: Run Postman collection tests 
         parameters:
           collection:
             type: string
-          environment:
-            type: string
           temp:
-            type: string
-          iteration-data:
             type: string
         executor: newman/postman-newman-docker
         
