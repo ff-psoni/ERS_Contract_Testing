@@ -26,19 +26,20 @@ jobs:
           - run:
               name: Echo Environment Variable
               command: |
-                # echo export TESTRAIL_RUN_NAME="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_$(date '+%F_%H:%M:%S')" >> "$BASH_ENV"; source "$BASH_ENV"
-                echo export TESTRAIL_TITLE="${TESTRAIL_RUN_NAME}" >> "$BASH_ENV"; source "$BASH_ENV"
-                # echo export TESTRAIL_PROJECT_ID="21" >> "$BASH_ENV"; source "$BASH_ENV"
-                # echo export TESTRAIL_APIKEY="${TESTRAIL_APIKEY}" >> "$BASH_ENV"; source "$BASH_ENV"
-                # echo export TESTRAIL_DOMAIN="${TESTRAIL_DOMAIN}" >> "$BASH_ENV"; source "$BASH_ENV"
-                echo export TESTRAIL_USERNAME="${TESTRAIL_USERNAME}" >> "$BASH_ENV"; source "$BASH_ENV"
-                source "$BASH_ENV"
-                echo "$TESTRAIL_TITLE"
-                echo "$TESTRAIL_USERNAME"
+                echo 'export TESTRAIL_DOMAIN='${TESTRAIL_DOMAIN}
+                echo 'export TESTRAIL_USERNAME='${TESTRAIL_USERNAME}
+                echo 'export TESTRAIL_APIKEY='${TESTRAIL_APIKEY}
+                TESTRAIL_PROJECT_NAME="BCS"
+                echo 'export TESTRAIL_PROJECT_NAME='${TESTRAIL_PROJECT_NAME}
+
+                DATENOW=$( date '+%F_%H:%M:%S' )
+                TESTRAIL_RUN_NAME="$CIRCLE_PROJECT_REPONAME $DATENOW"
+                echo 'export TESTRAIL_RUN_NAME='${TESTRAIL_RUN_NAME}
+
           - run:
               name: Executing the collection
               command: |
-                npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --env-var TESTRAIL_APIKEY=${TESTRAIL_APIKEY} --reporters "cli,htmlextra,testrail"
+                npx newman run Practice.postman_collection.json --env-var "TESTRAIL_TITLE=<< parameters.temp >>" --reporters "cli,htmlextra,testrail"
                 
           - store_artifacts: { path: ~/project/newman }
           - store_test_results: { path: /root/project/newman }       
