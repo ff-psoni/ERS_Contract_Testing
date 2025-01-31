@@ -4,8 +4,8 @@ orbs:
   newman: postman/newman@1.0.0
 
 jobs:          
-  emission-reporting-service:
-        description: Run Postman collection tests for Emission Reporting Service
+  testrail-service-demo:
+        description: Run Postman collection tests 
         parameters:
           collection:
             type: string
@@ -22,22 +22,20 @@ jobs:
           - run:
               name: Installing htmlextra reporting plugin
               command: |
-                npm install -g newman-reporter-htmlextra           
+                npm install -g newman-reporter-htmlextra newman-reporter-testrail          
           - run:          
-              name: Executing the collection tests for Emission Reporting Service
+              name: Executing the collection tests for checking TestRail Integration
               command: |
-                npx newman run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${POSTMAN_API_KEY} -e https://api.getpostman.com/environments/<< parameters.environment >>?apikey=${POSTMAN_API_KEY} -d << parameters.iteration-data >> --reporters "cli,htmlextra" --folder "get_emission_estimates"
+                npx newman -r testrail run https://api.getpostman.com/collections/<< parameters.collection >>?apikey=${POSTMAN_API_KEY} --reporters "cli,htmlextra"
           - store_artifacts: {path: ~/project}
           - store_test_results: {path: /root/project/newman}
 
 workflows:
-  billikens-api-automation:
+  qe-guild-api-automation:
     jobs:      
-      - emission-reporting-service:
-          name: Emission Reporting Service
-          collection: 29730803-543de010-78be-4b07-ae1b-ae37ff760a15
-          environment: 27218141-54c92888-5ba8-4985-b561-4a35358a05e1
-          iteration-data: ./data.json
+      - testrail-service-demo:
+          name: ERS Demo
+          collection: 27218141-242b1743-d251-4ab9-a0fd-24102d0622fb
           temp: "Automated Run: $( date '+%F_%H:%M:%S' )"
           context:
             - postman
